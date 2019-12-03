@@ -6,7 +6,8 @@
 <body>
   <script>
     // Your JavaScript goes here!
-
+    var playerScore = 0;
+    var pcScore = 0;
     /**************************************************
      * ComputerPlay:
      * Randomly returns Rock, Paper, or Scissors.
@@ -35,19 +36,24 @@
       var playerMove = playerSelection.toLocaleLowerCase();
       
       
+      
       if (computerMove == playerMove) {
         return "It's a draw! " + "PC " + computerMove + " equals " + playerMove + "!";
       }
       else if (computerMove == "rock" && playerMove == "scissors") {
+        pcScore++;
         return "You lose! " + "PC " + computerMove + " beats " + playerMove + "!";
       }
       else if (computerMove == "scissors" && playerMove == "paper") {
+        pcScore++;
         return "You lose! " + "PC " + computerMove + " beats " + playerMove + "!";
       }
       else if (computerMove == "paper" && playerMove == "rock") {
+        pcScore++;
         return "You lose! " + "PC " + computerMove + " beats " + playerMove + "!";
       }
       else {
+        playerScore++;
         return "You win! " + playerMove + " beats " + "PC " + computerMove + "!";
       }
     }
@@ -64,7 +70,21 @@
         i++;
       }
       while (i < 5);
+
+      if (pcScore > playerScore) {
+        console.log("You lost, the score is " + pcScore + " to " + playerScore + "!");
+      }
+      else if (playerScore > pcScore) {
+        console.log("You won, the score is " + playerScore + " to " + pcScore + "!");
+      }
+      else {
+        console.log("Tie game!");
+      }
+
     }
+
+   
+
 
     game();
     
