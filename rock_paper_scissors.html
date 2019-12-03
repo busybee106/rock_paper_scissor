@@ -7,9 +7,67 @@
   <script>
     // Your JavaScript goes here!
 
+    /**************************************************
+     * ComputerPlay:
+     * Randomly returns Rock, Paper, or Scissors.
+     *************************************************/
+    function computerPlay() {
+      var array = ['Rock', 'Paper', 'Scissors'];
+      var pcMove = Math.floor(Math.random() * 3);
 
+      if (pcMove === 0) {
+        return array[0];
+      }
+      else if (pcMove === 1) {
+        return array[1];
+      }
+      else
+        return array[2];
+    }
+
+    /**************************************************
+     * playRound:
+     * Play a round of Rock, Paper, Scissors with the PC.
+     *************************************************/
+    function playRound(playerSelection, computerSelection) {
+
+      var computerMove = computerSelection.toLocaleLowerCase();
+      var playerMove = playerSelection.toLocaleLowerCase();
+      
+      
+      if (computerMove == playerMove) {
+        return "It's a draw! " + "PC " + computerMove + " equals " + playerMove + "!";
+      }
+      else if (computerMove == "rock" && playerMove == "scissors") {
+        return "You lose! " + "PC " + computerMove + " beats " + playerMove + "!";
+      }
+      else if (computerMove == "scissors" && playerMove == "paper") {
+        return "You lose! " + "PC " + computerMove + " beats " + playerMove + "!";
+      }
+      else if (computerMove == "paper" && playerMove == "rock") {
+        return "You lose! " + "PC " + computerMove + " beats " + playerMove + "!";
+      }
+      else {
+        return "You win! " + playerMove + " beats " + "PC " + computerMove + "!";
+      }
+    }
+
+    /**************************************************
+     * game:
+     * Play a 5 round game of Rock, Paper, Scissors.
+     *************************************************/
+    function game() {
+      var i = 0;
+      do {
+        var userInput = prompt("What do you choose?");
+        console.log(playRound(userInput, computerPlay()));
+        i++;
+      }
+      while (i < 5);
+    }
+
+    game();
     
-    console.log("Hello, World!")
   </script>
 </body>
 </html>
