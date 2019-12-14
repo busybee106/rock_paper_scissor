@@ -2,126 +2,41 @@
 <html>
 <head>
   <title>Rock, Paper, Scissors</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  
-  <input id="rock" type="button">Rock</input>
-  <input id="paper" type="button">Paper</input>
-  <input id="scissors" type="button">Scissors</input>
 
-  <div id="results";>
+  <h1>Rock, Paper, Scissors!</h1>
 
+  <div id="container">
+
+    <div class="symbols" id="r">
+      <img src="rock.png" id="fist">
+    </div>
+
+    <div class="symbols" id="p">
+      <img src="paper.png" id="paper">
+    </div>
+
+    <div class="symbols" id="s">
+      <img src="scissors.png" id="scissor">
+    </div>
 
   </div>
 
-  <script>
-    // Your JavaScript goes here!
-    var playerScore = 0;
-    var pcScore = 0;
-    /**************************************************
-     * ComputerPlay:
-     * Randomly returns Rock, Paper, or Scissors.
-     *************************************************/
-    function computerPlay() {
-      var array = ['rock', 'paper', 'scissors'];
-      var pcMove = Math.floor(Math.random() * 3);
+  <h2>RESULTS</h2>
+  <div id="results">
+    <p>Paper covers Rock! You win!</p>
+  </div>
 
-      if (pcMove === 0) {
-        return array[0];
-      }
-      else if (pcMove === 1) {
-        return array[1];
-      }
-      else
-        return array[2];
-    }
 
-    /**************************************************
-     * playRound:
-     * Play a round of Rock, Paper, Scissors with the PC.
-     *************************************************/
-    function playRound(playerSelection, computerPlay) {
+  <div id="scoreBoard">
+    <div id="user-label" class="badge">user</div>
+    <div id="computer-label" class="badge">comp</div>
+    <span id="user-score">0</span>:<span id="computer-score">0</span>
+  </div>
 
-      var computerMove = computerPlay.toLocaleLowerCase();
-      var playerMove = playerSelection.toLocaleLowerCase();
-      
-           
-      if (computerMove == playerMove) {
-        console.log("It's a draw! " + "PC " + computerMove + " equals " + playerMove + "!");
-      }
-      else if (computerMove == "rock" && playerMove == "scissors") {
-        pcScore++;
-        if (pcScore == 5) {
-          console.log("You lose!");
-          return;
-        }
-        else {
-        console.log("You lose! " + "PC " + computerMove + " beats " + playerMove + "!");
-        }
-      }
-      else if (computerMove == "scissors" && playerMove == "paper") {
-        pcScore++;
-        if (pcScore == 5) {
-          console.log("You lose!");
-        }
-        else {
-        console.log("You lose! " + "PC " + computerMove + " beats " + playerMove + "!");
-        }
-      }
-      else if (computerMove == "paper" && playerMove == "rock") {
-        pcScore++;
-        if (pcScore == 5) {
-          console.log("You lose!");
-        }
-        else {
-        console.log("You lose! " + "PC " + computerMove + " beats " + playerMove + "!");
-        }
-      }
-      else {
-        playerScore++;
-        if (playerScore == 5) {
-          console.log("You win!");
-        }
-        else {
-        console.log("You win! " + playerMove + " beats " + "PC " + computerMove + "!");
-        }
-      }
-    }
+  <script src="code.js"></script>
 
-    //Rock button
-    document.getElementById("rock").addEventListener("click", function() {
-      if (playerScore === 5 || pcScore === 5) {
-        if (playerScore > pcScore) {
-          return "You win!";
-        }
-        return;
-      }
-      playRound('rock', computerPlay());
-    });
-
-    //Paper button
-    document.getElementById("paper").addEventListener("click", function() {
-      if (playerScore === 5 || pcScore === 5) {
-        if (playerScore > pcScore) {
-          return "You win!";
-        }
-        return;
-      }
-      playRound('paper', computerPlay());
-    });
-
-    //Scissors button
-    document.getElementById("scissors").addEventListener("click", function() {
-      if (playerScore === 5 || pcScore === 5) {
-        if (playerScore > pcScore) {
-          return "You win!";
-        }
-        return;
-      }
-      playRound('scissors', computerPlay());
-    });
-    
-    
-  </script>
 </body>
 </html>

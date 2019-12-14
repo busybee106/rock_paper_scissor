@@ -1,0 +1,55 @@
+#container {
+    display: flex;
+    justify-content: center;
+}
+
+img:hover {
+    background-color: olivedrab;
+    transition: 0.3s;
+}
+
+img {
+    border-style: solid;
+    border-radius: 50%;
+    padding: 5px;
+    margin: 10px;
+    width: 180px;
+    height: 163px;
+    border-color: chocolate;
+}
+
+.symbols {
+    padding: 10px 10px 10px 10px;
+}
+
+body {
+    background-color: black;
+}
+
+h1 {
+    color: whitesmoke;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    color: whitesmoke;
+}
+
+#scoreBoard {
+    color: whitesmoke;
+    text-align: center;
+    font-size: 100px;
+    display: block;
+    justify-content: center;
+}
+
+.badge {
+    font-size: 40px;
+}
+
+p {
+    color: whitesmoke;
+    text-align: center;
+    font-size: 75px;
+}
