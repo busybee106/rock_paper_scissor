@@ -1,36 +1,28 @@
 //cache the DOM
-const userScore = 0;
-const computerScore = 0;
+let userScore = 0;
+let computerScore = 0;
 const userScore_span = document.getElementById("user-score");
 const computerScore_span = document.getElementById("computer-score");
 const scoreBoard_div = document.querySelector("#scoreBoard");
-const result_div = document.querySelector("#results");
+const result_p = document.querySelector("#results > p");
 const rock_div = document.getElementById("r");
 const paper_div = document.getElementById("p");
 const scissors_div = document.getElementById("s");
 
-
+function main() {
 //on click, run the following function
 rock_div.addEventListener('click', function() {
-    console.log("hey you clicked on rock!");
+    playGame("r");
 })
 
 paper_div.addEventListener('click', function() {
-    console.log("hey you clicked on paper!");
+    playGame("p");
 })
 
 scissors_div.addEventListener('click', function() {
-    console.log("hey you clicked on scissors!");
+    playGame("s");
 })
-
-
-
-
-
-
-
-
-
+}
 
 /**************************************************
  * ComputerPlay:
@@ -48,110 +40,82 @@ function computerPlay() {
     }
     else
         return array[2];
+}
+
+
+/************************************************
+ * convertToWord:
+ * Clean up results
+ ***********************************************/
+function convertToWord(letter) {
+    if (letter === "r") return "rock";
+    if (letter === "p") return "paper";
+    return "scissors";
+}
+
+/************************************************
+ * win:
+ * User wins
+ ***********************************************/
+function win(userChoice, computerChoice) {
+    userScore++;
+    userScore_span.innerHTML = userScore;
+    computerScore_span.innerHTML = computerScore;
+    const smallUserWord = "user".fontsize(3).sup();
+    const smallCompWord = "comp".fontsize(3).sup();
+    result_p.innerHTML = `${smallUserWord} ${convertToWord(userChoice)}  beats ${smallCompWord} ${convertToWord(computerChoice)}. you win!`;
+}    
+
+/************************************************
+ * lose:
+ * User loses
+ ***********************************************/
+function lose(userChoice, computerChoice) {
+    computerScore++;
+    userScore_span.innerHTML = userScore;
+    computerScore_span.innerHTML = computerScore;
+    const smallUserWord = "user".fontsize(3).sup();
+    const smallCompWord = "comp".fontsize(3).sup();
+    result_p.innerHTML = `${smallCompWord} ${convertToWord(computerChoice)} beats ${smallUserWord} ${convertToWord(userChoice)}. you lose!`;
+}
+
+/************************************************
+ * draw:
+ * User and computer draw
+ ***********************************************/
+function draw(userChoice, computerChoice) {
+    const smallUserWord = "user".fontsize(3).sup();
+    const smallCompWord = "comp".fontsize(3).sup();
+    result_p.innerHTML = "It's a draw!";
+}
+
+/************************************************
+ * playGame:
+ * Runs a round of rock, paper, scissors
+ ***********************************************/
+function playGame(userChoice) {
+    const computerChoice = computerPlay();
+    
+    switch (userChoice + computerChoice) {
+        //user win
+        case "rs":
+        case "pr":
+        case "sp":
+            win(userChoice, computerChoice);
+            break;
+        //user lose
+        case "sr":
+        case "rp":
+        case "ps":
+            lose(userChoice, computerChoice);
+            break;
+        //tie
+        case "rr":
+        case "pp":
+        case "ss":
+            draw(userChoice, computerChoice);
+            break;
     }
-    
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // /**************************************************
-    //  * playRound:
-    //  * Play a round of Rock, Paper, Scissors with the PC.
-    //  *************************************************/
-    // function playRound(playerSelection, computerPlay) {
-    
-    //   var computerMove = computerPlay.toLocaleLowerCase();
-    //   var playerMove = playerSelection.toLocaleLowerCase();
-      
-           
-    //   if (computerMove == playerMove) {
-    //     console.log("It's a draw! " + "PC " + computerMove + " equals " + playerMove + "!");
-    //   }
-    //   else if (computerMove == "rock" && playerMove == "scissors") {
-    //     pcScore++;
-    //     if (pcScore == 5) {
-    //       console.log("You lose!");
-    //       return;
-    //     }
-    //     else {
-    //     console.log("You lose! " + "PC " + computerMove + " beats " + playerMove + "!");
-    //     }
-    //   }
-    //   else if (computerMove == "scissors" && playerMove == "paper") {
-    //     pcScore++;
-    //     if (pcScore == 5) {
-    //       console.log("You lose!");
-    //     }
-    //     else {
-    //     console.log("You lose! " + "PC " + computerMove + " beats " + playerMove + "!");
-    //     }
-    //   }
-    //   else if (computerMove == "paper" && playerMove == "rock") {
-    //     pcScore++;
-    //     if (pcScore == 5) {
-    //       console.log("You lose!");
-    //     }
-    //     else {
-    //     console.log("You lose! " + "PC " + computerMove + " beats " + playerMove + "!");
-    //     }
-    //   }
-    //   else {
-    //     playerScore++;
-    //     if (playerScore == 5) {
-    //       console.log("You win!");
-    //     }
-    //     else {
-    //     console.log("You win! " + playerMove + " beats " + "PC " + computerMove + "!");
-    //     }
-    //   }
-    // }
-    
-    // //Rock button
-    // document.getElementById("rock").addEventListener("click", function() {
-    //   if (playerScore === 5 || pcScore === 5) {
-    //     if (playerScore > pcScore) {
-    //       return "You win!";
-    //     }
-    //     return;
-    //   }
-    //   playRound('rock', computerPlay());
-    // });
-    
-    // //Paper button
-    // document.getElementById("paper").addEventListener("click", function() {
-    //   if (playerScore === 5 || pcScore === 5) {
-    //     if (playerScore > pcScore) {
-    //       return "You win!";
-    //     }
-    //     return;
-    //   }
-    //   playRound('paper', computerPlay());
-    // });
-    
-    // //Scissors button
-    // document.getElementById("scissors").addEventListener("click", function() {
-    //   if (playerScore === 5 || pcScore === 5) {
-    //     if (playerScore > pcScore) {
-    //       return "You win!";
-    //     }
-    //     return;
-    //   }
-    //   playRound('scissors', computerPlay());
-    // });
+main();
